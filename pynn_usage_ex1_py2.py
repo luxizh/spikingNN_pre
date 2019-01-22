@@ -8,14 +8,20 @@ Created on Mon Jan 14 20:15:36 2019
 #import pyNN
 #from pyNN import *
 from pyNN.brian import *
+#import matplotlib
+#matplotlib.pyplot.ion()
 #from brian import *
-#setup(timestep=0.1,min_delay=2.0) 
+setup(timestep=0.1,min_delay=2.0) 
 ifcell=create(IF_cond_exp,{'i_offset':0.11,'tau_refrac':3.0,'v_thresh':-51.0})
-#times=map(float, range(5,105,10))
-#source=create(SpikeSourceArray,{'spike_times':times})
+times=map(float, range(5,105,10))
+source=create(SpikeSourceArray,{'spike_times':times})
 print(type(ifcell[0]))
 ifcell[0].tau_refrac
 ifcell[0].get_parameters()
+connect(source,ifcell,weight=0.006,delay=2.0)
+record_v(ifcell,'ifcell.dat')
+run(200.0)
+#end()
 #type(IF_cond_exp)
 #import matplotlib
 #matplotlib.pyplot.ion()
