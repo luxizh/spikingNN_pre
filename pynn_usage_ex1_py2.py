@@ -29,11 +29,17 @@ print(ifcell[0].get_parameters())
 connect(source,ifcell,weight=0.006,delay=2.0)
 record_v(ifcell,'ifcell.pkl')
 run(200.0)
+'''
 for (population, variables, filename) in simulator.state.write_on_end:
     io = get_io(filename)
     population.write_data(filename, variables)
 simulator.state.write_on_end = []
-#end()
+'''
+end()
+import pickle
+f = open('ifcell.pkl', 'rb')
+ifcell_load = pickle.load(f)
+import matplotlib.pyplot as plt
 #type(IF_cond_exp)
 #import matplotlib
 #matplotlib.pyplot.ion()
