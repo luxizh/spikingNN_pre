@@ -49,7 +49,7 @@ import pickle
 f = open('ifcell.pkl', 'rb')
 ifcell_load = pickle.load(f)
 plt.figure()
-plt.plot(ifcell_load)
+#plt.plot(ifcell_load)
 #type(IF_cond_exp)
 #import matplotlib
 #matplotlib.pyplot.ion()
