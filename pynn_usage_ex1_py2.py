@@ -12,6 +12,7 @@ from pyNN.brian import *
 import os
 import numpy
 import matplotlib.pyplot as plt
+from pyNN.utility.plotting import Figure, Panel
 #import matplotlib
 #matplotlib.pyplot.ion()
 #from brian import *
@@ -29,7 +30,10 @@ print(ifcell[0].get_parameters())
 #no v_init
 connect(source,ifcell,weight=0.006,delay=2.0)
 record_v(ifcell,'ifcell.pkl')
-ifcell.record('v')
+#ifcell.record('v')
+ifcell.record('spikes')
+ifcell[0:2].record(('v', 'gsyn_exc'))
+
 run(200.0)
 '''
 for (population, variables, filename) in simulator.state.write_on_end:
@@ -38,7 +42,16 @@ for (population, variables, filename) in simulator.state.write_on_end:
 simulator.state.write_on_end = []
 '''
 end()
+data = ifcell.get_data().segments[0]
 
+vm = data.filter(name="v")[0]
+gsyn = data.filter(name="gsyn_exc")[0]
+
+Figure(
+    Panel(vm, ylabel="Membrane potential (mV)"),
+    Panel(gsyn, ylabel="Synaptic conductance (uS)"),
+    Panel(data.spiketrains, xlabel="Time (ms)", xticks=True)
+).save("simulation_results.png")
 '''
 v_value=ifcell.get_data()
 plt.figure()
@@ -48,7 +61,7 @@ plt.plot(v_value.segments[0].analogsignals)
 import pickle
 f = open('ifcell.pkl', 'rb')
 ifcell_load = pickle.load(f)
-plt.figure()
+#plt.figure()
 #plt.plot(ifcell_load)
 #type(IF_cond_exp)
 #import matplotlib
