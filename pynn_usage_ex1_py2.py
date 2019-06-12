@@ -35,12 +35,12 @@ ifcell.record('spikes')
 ifcell[0:2].record(('v', 'gsyn_exc'))
 
 run(200.0)
-'''
+
 for (population, variables, filename) in simulator.state.write_on_end:
     io = get_io(filename)
     population.write_data(filename, variables)
 simulator.state.write_on_end = []
-'''
+
 end()
 data = ifcell.get_data().segments[0]
 
@@ -52,15 +52,20 @@ Figure(
     Panel(gsyn, ylabel="Synaptic conductance (uS)"),
     Panel(data.spiketrains, xlabel="Time (ms)", xticks=True)
 ).save("simulation_results.png")
+
 '''
 v_value=ifcell.get_data()
+print(v_value.segments[0].analogsignals[0].shape)
 plt.figure()
-plt.plot(v_value.segments[0].analogsignals)
+plt.plot(v_value.segments[0].analogsignals[0])
+plt.plot(v_value.segments[0].analogsignals[1])
+plt.show()
 '''
 
 import pickle
 f = open('ifcell.pkl', 'rb')
 ifcell_load = pickle.load(f)
+#print(ifcell_load)
 #plt.figure()
 #plt.plot(ifcell_load)
 #type(IF_cond_exp)
