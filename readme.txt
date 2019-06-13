@@ -16,3 +16,18 @@ Cannot work in the same environment with SpiNNaker
 Always call setup() at start
 Error: no attribute max_delay
 
+12/06/2019
+Problem to solve cannot use stdp with Brian
+Neo format file unsuccessful
+
+13/06/2019
+Problem solved 
+for brian dendritic_delay_fraction=0 default value 1.0
+skip: Using the Connection Set Algebra
+Skip:Reading connection patterns to/from a file
+Skip:User-defined connection algorithms
+To fix: invalid size --facilitating synapse type
+Works when change synapse type into step
+
+
+
