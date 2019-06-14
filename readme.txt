@@ -29,5 +29,8 @@ Skip:User-defined connection algorithms
 To fix: invalid size --facilitating synapse type
 Works when change synapse type into step
 
+14/06/2019
+To do:define own space structure and shape
+
 
 
