@@ -32,5 +32,15 @@ Works when change synapse type into step
 14/06/2019
 To do:define own space structure and shape
 
+15/06/2019
+Usage of class
+neo.core.analogsignal.AnalogSignal
+Record -> visit 
+vm = segment.analogsignals[0]
+vm.shape
+vm[i,j]
+Record more than one variable
+record([]) record()
+
 
 
