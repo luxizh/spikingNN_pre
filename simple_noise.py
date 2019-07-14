@@ -14,7 +14,7 @@ __delay__ = 0.250 # (ms)
 tauPlus = 8 #20 # 15 # 16.8 from literature
 tauMinus = 8 #20 # 30 # 33.7 from literature
 aPlus = 0.500  #tum 0.016 #9 #3 #0.5 # 0.03 from literature
-aMinus = 0.3500 #255 #tum 0.012 #2.55 #2.55 #05 #0.5 # 0.0255 (=0.03*0.85) from literature 
+aMinus = 0.2500 #255 #tum 0.012 #2.55 #2.55 #05 #0.5 # 0.0255 (=0.03*0.85) from literature 
 wMax = 5 #1 # G: 0.15 1
 wMaxInit = 1.00#0.1#0.100
 wMin = 0
@@ -94,17 +94,15 @@ def train(label,untrained_weights):
     for i in range(output_size):
         labelSpikes.append([])
     labelSpikes[label] = [int(max(max(spikeTimes)))+1]
+
     
-    '''
     if untrained_weights == None:
         untrained_weights = RandomDistribution('uniform', low=wMin, high=wMaxInit).next(input_size*output_size)
         #untrained_weights = RandomDistribution('normal_clipped', mu=0.1, sigma=0.05, low=wMin, high=wMaxInit).next(input_size*output_size)
         untrained_weights = np.around(untrained_weights, 3)
         #saveWeights(untrained_weights, 'untrained_weightssupmodel1traj')
         print ("init!")
-    else:
-        untrained_weights=weight_list
-    '''
+    
     #untrained_weights=weight_list
 
     print "length untrained_weights :", len(untrained_weights)
@@ -274,9 +272,9 @@ def test(spikeTimes, trained_weights,label):
 
 #==============main================
 
-#weight_list=None
-weight_list=np.load("trainedweight"+str(trylabel)+".npy")
-for i in range(3):
+weight_list=None
+#weight_list=np.load("trainedweight"+str(trylabel)+".npy")
+for i in range(5):
     #spikeTimes=generate_data(1)
     weight_list=train(label=1,untrained_weights=weight_list)
 np.save("trainedweight"+str(trylabel)+".npy",weight_list)
